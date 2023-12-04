@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 
 type InputProps = {
@@ -26,7 +25,7 @@ export const Input = (props: InputProps) => {
           name={name}
           onChange={onChange}
           value={value}
-          className={`bg-transparent peer px-2 py-2 ${
+          className={`peer bg-transparent px-2 py-2 ${
             icon && "pl-8"
           } text-base dark:text-snowy`}
         />
