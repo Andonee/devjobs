@@ -22,7 +22,7 @@ export const Button = (props: ButtonProps) => {
       <span className=" flex-between flex w-full items-center gap-3">
         {isProcessing && <span className="loader-button" />}
         <span
-          className={`w-full font-bold ${
+          className={`w-full text-base font-bold ${
             style === "dark" ? "text-snowy" : "text-violet"
           } dark:text-snowy`}
         >
