@@ -2,9 +2,9 @@
 import React from "react";
 
 type ButtonProps = {
-  label: string;
+  label: string | React.ReactNode;
   onClick: () => void;
-  style: "dark" | "light";
+  style: "dark" | "light" | "transparent";
   isProcessing?: boolean;
 };
 
@@ -13,11 +13,13 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={` w-full md:w-fit ${
+      className={`w-fit ${
         style === "dark"
-          ? "bg-violet hover:bg-lightViolet"
-          : "bg-lightGrey hover:bg-violet/30"
-      } rounded px-5 py-2 dark:bg-snowy/10 dark:hover:bg-snowy/30`}
+          ? "bg-violet hover:bg-lightViolet dark:bg-snowy/10 dark:hover:bg-snowy/30"
+          : style === "transparent"
+            ? "bg-transparent"
+            : "bg-lightGrey hover:bg-violet/30 dark:bg-snowy/10 dark:hover:bg-snowy/30"
+      } rounded px-5 py-2 `}
     >
       <span className=" flex-between flex w-full items-center gap-3">
         {isProcessing && <span className="loader-button" />}
