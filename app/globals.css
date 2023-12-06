@@ -24,3 +24,10 @@
     line-height: 26px;
   }
 }
+
+html,
+body,
+body > div:first-child {
+  height: 100vh;
+  font-size: 16px;
+}
