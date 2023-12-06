@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${kumbhSans.className} bg-snowy dark:bg-midnight`}>
+      <body className={`${kumbhSans.className} bg-lightGrey dark:bg-midnight`}>
         <Provider>
           <header>
             <Navbar>
@@ -30,7 +30,7 @@ export default function RootLayout({
             </Navbar>
           </header>
         </Provider>
-        {children}
+        <div className="mx-auto w-[80%] pb-10">{children}</div>
       </body>
     </html>
   );
