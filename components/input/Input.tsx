@@ -12,7 +12,7 @@ export const Input = (props: InputProps) => {
   const { label, icon, value, onChange, name } = props;
   return (
     <div
-      className={`flex content-center items-center rounded-md border-2 border-snowy dark:border-darkBlue`}
+      className={`flex w-full content-center items-center rounded-md border-2 border-snowy dark:border-darkBlue`}
     >
       <label className=" relative flex w-full  flex-col dark:bg-darkBlue">
         {icon && (

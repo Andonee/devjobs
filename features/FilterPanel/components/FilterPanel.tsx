@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { Input, Checkbox, Button, Modal } from "@/components/";
+import { Input, Checkbox, Button } from "@/components/";
 import search from "@/public/icons/search.svg";
 import pin from "@/public/icons/pin.svg";
 import { SearchIcon, FilterIcon } from "@/components/icons";
+import FilterModal from "./FilterModal";
 
 export const FilterPanel = () => {
   const [name, setName] = useState("");
@@ -60,14 +61,16 @@ export const FilterPanel = () => {
           isChecked={fullTime}
           label="Full Time Only"
         />
-        <Button label="Search" onClick={onModalOpenHandler} style="dark" />
+        <div>
+          <Button label="Search" onClick={onModalOpenHandler} style="dark" />
+        </div>
       </div>
       <div className="ml-auto flex justify-end lg:hidden">
         <Button
           label={
             <FilterIcon fill={resolvedTheme === "light" ? "#5964E0" : "#fff"} />
           }
-          onClick={() => {}}
+          onClick={onModalOpenHandler}
           style="transparent"
         />
         <Button
@@ -77,11 +80,15 @@ export const FilterPanel = () => {
         />
       </div>
       {isOpen && (
-        <Modal onCloseHandler={onModalCloseHandler} isOpen={isOpen}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque rerum
-          ipsa commodi sunt, distinctio, cum ducimus et nobis rem, praesentium
-          quo a ea maiores quam quidem. Aliquam eaque fugit unde?
-        </Modal>
+        <FilterModal
+          isOpen={isOpen}
+          onModalCloseHandler={onModalCloseHandler}
+          onSearchHandler={() => {}}
+          location={location}
+          fullTime={fullTime}
+          onSearchFullTimeInputHandler={onSearchFullTimeInputHandler}
+          onSearchLocationInputHandler={onSearchLocationInputHandler}
+        />
       )}
     </div>
   );

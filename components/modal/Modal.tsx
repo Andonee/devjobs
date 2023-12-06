@@ -28,16 +28,18 @@ export const Modal = (props: ModalType) => {
 
   return (
     <ReactPortal wrappedId={"react-portal-modal-container"}>
-      <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center overflow-hidden bg-slate-900/40 pb-10 pl-5 pr-5 pt-10">
-        <div className="flex h-10 w-full justify-end rounded-t-md bg-snowy p-2 dark:bg-darkBlue">
-          <button onClick={onCloseHandler}>
-            <CloseIcon
-              fill={resolvedTheme === "light" ? "#9e7f66" : "#9DAEC2"}
-            />
-          </button>
-        </div>
-        <div className="flex h-fit max-h-[100%] min-h-[100px] w-fit min-w-[100px] max-w-[100%] flex-wrap content-center items-center rounded-b-md bg-snowy p-2 dark:bg-darkBlue">
-          {children}
+      <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center overflow-hidden bg-slate-900/40 pb-10 pl-5 pr-5 pt-10 ">
+        <div className="h-fit min-h-[100px] w-[100%] lg:max-w-3xl">
+          <div className="flex h-10 w-full justify-end rounded-t-md bg-snowy p-2 dark:bg-darkBlue">
+            <button onClick={onCloseHandler}>
+              <CloseIcon
+                fill={resolvedTheme === "light" ? "#9e7f66" : "#9DAEC2"}
+              />
+            </button>
+          </div>
+          <div className="max-h-[calc(100%-40px)] overflow-auto rounded-b-md bg-snowy dark:bg-darkBlue">
+            {children}
+          </div>
         </div>
       </div>
     </ReactPortal>
