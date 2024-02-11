@@ -31,3 +31,7 @@ body > div:first-child {
   height: 100vh;
   font-size: 16px;
 }
+
+textarea {
+  resize: none;
+}

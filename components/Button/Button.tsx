@@ -3,7 +3,7 @@ import React from "react";
 
 type ButtonProps = {
   label: string | React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   style: "dark" | "light" | "transparent";
   isProcessing?: boolean;
 };
@@ -44,7 +44,7 @@ export const Button = (props: ButtonProps) => {
         <span
           className={`w-full text-base font-bold ${
             style === "dark" ? "text-snowy" : "text-violet"
-          } dark:text-snowy`}
+          } uppercase dark:text-snowy`}
         >
           {label}
         </span>

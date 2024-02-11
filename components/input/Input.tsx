@@ -1,15 +1,52 @@
-import React from "react";
+import React, {
+  forwardRef,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+} from "react";
+import classNames from "classnames";
 
-type InputProps = {
-  label?: string;
-  icon?: any;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export type InputSize = "medium" | "large";
+export type InputType = "text" | "email" | "number";
+
+type HTMLInputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+
+export type InputProps = {
+  id: string;
   name: string;
+  label: string;
+  icon?: React.ReactNode;
+  type?: InputType;
+  size?: InputSize;
+  className?: string;
+  required?: boolean;
+  value?: string;
+} & Omit<HTMLInputProps, "size" | "ref">;
+
+const sizeMap: { [key in InputSize]: string } = {
+  medium: "p-2 text-base",
+  large: "p-4 text-base",
 };
 
-export const Input = (props: InputProps) => {
-  const { label, icon, value, onChange, name } = props;
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const {
+    id,
+    name,
+    label,
+    icon,
+    type,
+    size = "medium",
+    className,
+    required,
+    placeholder,
+    defaultValue,
+    ...rest
+  } = props;
+
+  console.log("className", className);
+
   return (
     <div
       className={`flex w-full content-center items-center rounded-md border-2 border-snowy dark:border-darkBlue`}
@@ -21,24 +58,36 @@ export const Input = (props: InputProps) => {
           </span>
         )}
         <input
-          type="text"
+          id={id}
+          ref={ref}
           name={name}
-          onChange={onChange}
-          value={value}
-          className={`peer bg-transparent px-2 py-2 ${
-            icon && "pl-10"
-          } text-base dark:text-snowy`}
+          type={type}
+          aria-label={label}
+          placeholder={placeholder}
+          value={defaultValue}
+          className={classNames([
+            `peer bg-snowy dark:bg-darkBlue ${
+              icon && "pl-10"
+            } text-base dark:text-snowy`,
+            sizeMap[size],
+            className,
+          ])}
+          {...rest}
         />
         <span
           className={`absolute ${
             icon ? "left-8" : "left-2"
-          }  mx-1 max-w-[90%]  truncate bg-snowy px-2 text-xs text-darkBlue/50 transition-all peer-focus:top-[-25%] peer-focus:translate-y-0 dark:bg-darkBlue dark:text-snowy  ${
-            value ? "top-[-25%] translate-y-0" : "top-[50%] translate-y-[-50%]"
+          }  mx-1 max-w-[90%]  truncate bg-snowy px-2 text-xs text-darkBlue/50 transition-all peer-focus:top-[0] peer-focus:translate-y-[-50%] dark:bg-darkBlue dark:text-snowy  ${
+            defaultValue || placeholder
+              ? "top-[0] translate-y-[-50%]"
+              : "top-[50%] translate-y-[-50%]"
           }`}
         >
-          {label}
+          <span>
+            {required && <span>*</span>} {label}
+          </span>
         </span>
       </label>
     </div>
   );
-};
+});
