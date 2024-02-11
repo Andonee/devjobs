@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Input, Checkbox, Button } from "@/components/";
 import search from "@/public/icons/search.svg";
@@ -9,6 +10,11 @@ import { SearchIcon, FilterIcon } from "@/components/icons";
 import FilterModal from "./FilterModal";
 
 export const FilterPanel = () => {
+  const currentPath = usePathname();
+  const isHomePage = currentPath === "/";
+
+  if (!isHomePage) return null;
+
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [fullTime, setFullTime] = useState(false);

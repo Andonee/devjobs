@@ -1,4 +1,4 @@
-version: '3.5'
+version: "3.5"
 
 services:
   db:
@@ -14,7 +14,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       # - pgdata:/data/db
       - postgres_data:/var/lib/postgresql/data/
@@ -24,17 +24,17 @@ services:
       dockerfile: Dockerfile
     container_name: devjobs-client
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
     depends_on:
       - db
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
 
 volumes:
   # pgdata:
