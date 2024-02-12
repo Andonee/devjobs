@@ -19,8 +19,6 @@ export const FormInput = <TFormValues extends Record<string, unknown>>({
   const errorMessages = get(errors, name);
   const hasError = !!(errors && errorMessages);
 
-  console.log("hasError", hasError);
-
   return (
     <div className={classNames("", className)} aria-live="polite">
       <Input
