@@ -45,8 +45,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...rest
   } = props;
 
-  console.log("className", className);
-
   return (
     <div
       className={`flex w-full content-center items-center rounded-md border-2 border-snowy dark:border-darkBlue`}

@@ -13,6 +13,7 @@ import {
   FormCheckbox,
 } from "@/components";
 import { FormDataSchema } from "../lib/schema";
+import { addJob } from "@/app/_actions";
 
 export const JobForm = () => {
   const [data, setData] = useState<Inputs>();
@@ -33,17 +34,17 @@ export const JobForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
+    reset,
     watch,
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
 
-  // const onSubmitHandler: SubmitHandler<Inputs> = (data) => {
-  //   console.log("data", data);
-  // };
-  const onSubmitHandler = handleSubmit((data) => {
+  const onSubmitHandler = handleSubmit(async (data) => {
     console.log(data);
+    const result = await addJob(data);
+    reset();
+    console.log("result", result);
   });
 
   return (

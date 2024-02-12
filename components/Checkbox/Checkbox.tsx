@@ -22,7 +22,6 @@ export type CheckboxProps = {
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { id, name, label, className, required, isChecked, ...rest } = props;
-    console.log("isChecked", isChecked);
     return (
       <span className="h-fit">
         <label
