@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { FormDataSchema } from "@/features/JobForm/lib/schema";
 import { prisma } from "@/lib/prisma";
@@ -11,10 +12,10 @@ const addJob = async (data: Inputs) => {
     const result = FormDataSchema.safeParse(data);
 
     if (result.success) {
-      const job = await prisma.job.create({
+      await prisma.jobs.create({
         data: result.data,
       });
-
+      revalidatePath("/");
       return {
         success: true,
         data: result.data,
@@ -32,4 +33,19 @@ const addJob = async (data: Inputs) => {
   }
 };
 
-export { addJob };
+const getAllJobs = async () => {
+  try {
+    const jobs = await prisma.jobs.findMany();
+    return {
+      success: true,
+      data: jobs,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err,
+    };
+  }
+};
+
+export { addJob, getAllJobs };
